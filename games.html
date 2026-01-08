@@ -68,11 +68,12 @@
         filteredGames.forEach(game => {
           const gameBox = document.createElement("div");
           gameBox.className = "game-box";
-          gameBox.innerHTML = `
-                    
-						<img src="images/${game.id}.png" alt="${game.title}" onerror="this.src='images/default.png'">
-							<a href="embed.html?id=${game.id}">${game.title}</a>
-                `;
+			gameBox.innerHTML = `
+			  <img src="images/${game.id}.png" alt="${game.title}" onerror="this.src='images/default.png'">
+			  <a href="embed.html?id=${game.id}" target="_blank" rel="noopener">
+				${game.title}
+			  </a>
+			`;
           container.appendChild(gameBox);
         });
       }
@@ -92,10 +93,10 @@
 							<img src="${img}" alt="${zone.name}">
 								<a href="#">${zone.name}</a>
                     `;
-            card.onclick = (e) => {
-              e.preventDefault();
-              window.location.href = `embed_gn.html?id=${zone.id}`;
-            };
+			card.onclick = (e) => {
+			  e.preventDefault();
+			  window.open(`embed_gn.html?id=${zone.id}`, "_blank");
+			};
             container.appendChild(card);
           });
         } catch (error) {
