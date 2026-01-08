@@ -1,6 +1,6 @@
 function loadJSFromURL() {
   const url = localStorage.getItem('JS');
-  const fallback = 'https://wowdabug.github.io/wdbg/scripts/js/default.js';
+  const fallback = 'https://wdbgames.github.io/scripts/js/default.js';
 
   function load(src, onFail) {
     const s = document.createElement('script');
@@ -18,3 +18,4 @@ function loadJSFromURL() {
 }
 
 document.addEventListener('DOMContentLoaded', loadJSFromURL);
+
