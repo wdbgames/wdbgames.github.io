@@ -57,7 +57,7 @@
   },
   {
     "id": 15,
-    "link": "https://wdbgames.github.io/server1/brotato/"
+    "link": "https://wdbgames.github.io/server2/brotato/"
   },
   {
     "id": 16,
@@ -81,7 +81,7 @@
   },
   {
     "id": 21,
-    "link": "https://wdbgames.github.io/server1/crazy_cattle/"
+    "link": "https://wdbgames.github.io/server2/crazy_cattle/"
   },
   {
     "id": 22,
@@ -173,15 +173,11 @@
   },
   {
     "id": 44,
-    "link": "https://wdbgames.github.io/server1/people_playground/"
+    "link": "https://wdbgames.github.io/server2/people_playground/"
   },
   {
     "id": 45,
     "link": "https://wdbgames.github.io/server1/pixels_filling_squares/"
-  },
-  {
-    "id": 46,
-    "link": "https://wdbgames.github.io/server1/pizza_tower/"
   },
   {
     "id": 47,
@@ -270,10 +266,6 @@
   {
     "id": 68,
     "link": "https://wdbgames.github.io/server1/the_final_earth_2/"
-  },
-  {
-    "id": 69,
-    "link": "https://wdbgames.github.io/server1/tower_wizard/"
   },
   {
     "id": 70,
