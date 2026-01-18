@@ -1,66 +1,130 @@
 [
   {
     "id": 1,
-    "link": "https://wowdabug.github.io/wdbgames/server1/2048/"
+    "link": "https://wdbgames.github.io/server1/2048/"
   },
   {
     "id": 2,
-    "link": "https://wowdabug.github.io/wdbgames/server1/a_dance_of_fire_and_ice/"
+    "link": "https://wdbgames.github.io/server1/a_dance_of_fire_and_ice/"
   },
   {
     "id": 3,
-    "link": "https://wowdabug.github.io/wdbgames/server1/angry_birds/"
+    "link": "https://wdbgames.github.io/server1/angry_birds/"
   },
   {
     "id": 4,
-    "link": "https://wowdabug.github.io/wdbgames/server1/appel/"
+    "link": "https://wdbgames.github.io/server1/appel/"
   },
   {
     "id": 5,
-    "link": "https://wowdabug.github.io/wdbgames/server1/asteroids/"
+    "link": "https://wdbgames.github.io/server1/asteroids/"
   },
   {
     "id": 6,
-    "link": "https://wowdabug.github.io/wdbgames/server1/babel_tower/"
+    "link": "https://wdbgames.github.io/server1/babel_tower/"
   },
   {
     "id": 7,
-    "link": "https://wowdabug.github.io/wdbgames/server1/baldis_basics/"
+    "link": "https://wdbgames.github.io/server1/baldis_basics/"
   },
   {
     "id": 8,
-    "link": "https://wowdabug.github.io/wdbgames/server1/basket_random/"
+    "link": "https://wdbgames.github.io/server1/basket_random/"
   },
   {
     "id": 9,
-    "link": "https://wowdabug.github.io/wdbgames/server1/battleship/"
+    "link": "https://wdbgames.github.io/server1/battleship/"
   },
   {
     "id": 10,
-    "link": "https://wowdabug.github.io/wdbgames/server1/big_flappy_tower_tiny_square/"
+    "link": "https://wdbgames.github.io/server1/big_flappy_tower_tiny_square/"
   },
   {
     "id": 11,
-    "link": "https://wowdabug.github.io/wdbgames/server1/big_tower_tiny_square/"
+    "link": "https://wdbgames.github.io/server1/big_tower_tiny_square/"
   },
   {
     "id": 12,
-    "link": "https://wowdabug.github.io/wdbgames/server1/big_tower_tiny_square_2/"
+    "link": "https://wdbgames.github.io/server1/big_tower_tiny_square_2/"
   },
   {
     "id": 13,
-    "link": "https://wowdabug.github.io/wdbgames/server1/bitlife/"
+    "link": "https://wdbgames.github.io/server1/bitlife/"
   },
   {
     "id": 14,
-    "link": "https://wowdabug.github.io/wdbgames/server1/boxing_random/"
+    "link": "https://wdbgames.github.io/server1/boxing_random/"
   },
   {
     "id": 15,
-    "link": "https://wowdabug.github.io/wdbgames/server1/brotato/"
+    "link": "https://wdbgames.github.io/server1/brotato/"
   },
   {
     "id": 16,
-    "link": "https://wowdabug.github.io/wdbgames/server1/champion_island/"
+    "link": "https://wdbgames.github.io/server1/champion_island/"
+  },
+  {
+    "id": 17,
+    "link": "https://wdbgames.github.io/server1/2048/"
+  },
+  {
+    "id": 18,
+    "link": "https://wdbgames.github.io/server1/a_dance_of_fire_and_ice/"
+  },
+  {
+    "id": 19,
+    "link": "https://wdbgames.github.io/server1/angry_birds/"
+  },
+  {
+    "id": 20,
+    "link": "https://wdbgames.github.io/server1/appel/"
+  },
+  {
+    "id": 21,
+    "link": "https://wdbgames.github.io/server1/asteroids/"
+  },
+  {
+    "id": 22,
+    "link": "https://wdbgames.github.io/server1/babel_tower/"
+  },
+  {
+    "id": 23,
+    "link": "https://wdbgames.github.io/server1/baldis_basics/"
+  },
+  {
+    "id": 24,
+    "link": "https://wdbgames.github.io/server1/basket_random/"
+  },
+  {
+    "id": 25,
+    "link": "https://wdbgames.github.io/server1/battleship/"
+  },
+  {
+    "id": 26,
+    "link": "https://wdbgames.github.io/server1/big_flappy_tower_tiny_square/"
+  },
+  {
+    "id": 27,
+    "link": "https://wdbgames.github.io/server1/big_tower_tiny_square/"
+  },
+  {
+    "id": 28,
+    "link": "https://wdbgames.github.io/server1/big_tower_tiny_square_2/"
+  },
+  {
+    "id": 29,
+    "link": "https://wdbgames.github.io/server1/bitlife/"
+  },
+  {
+    "id": 30,
+    "link": "https://wdbgames.github.io/server1/boxing_random/"
+  },
+  {
+    "id": 31,
+    "link": "https://wdbgames.github.io/server1/brotato/"
+  },
+  {
+    "id": 32,
+    "link": "https://wdbgames.github.io/server1/champion_island/"
   }
 ]
