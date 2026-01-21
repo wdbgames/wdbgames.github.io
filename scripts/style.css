@@ -1,19 +1,146 @@
+:root {
+	--bg-main: #1e1e1e;
+	--bg-deep: #111;
+	--bg-card: #2a2a2a;
+	--bg-hover: #333;
+	--bg-hover-strong: #444;
+	--text-primary: #ffffff;
+	--text-secondary: #dddddd;
+	--text-muted: #aaaaaa;
+	--accent-primary: #686df2;
+	--accent-hover: #5a61e0;
+}
+
+[data-theme="Light"] {
+    --bg-main: #f8f9fa;
+    --bg-deep: #e9ecef;
+    --bg-card: #ffffff;
+    --bg-hover: #f1f3f5;
+    --bg-hover-strong: #dee2e6;
+    --text-primary: #212529;
+    --text-secondary: #495057;
+    --text-muted: #6c757d;
+    --accent-primary: #4c6ef5;
+    --accent-hover: #3b5bdb;
+}
+
+[data-theme="Ice"] {
+    --bg-main: #eceff4;
+    --bg-deep: #d8dee9;
+    --bg-card: #e5e9f0;
+    --bg-hover: #d8dee9;
+    --bg-hover-strong: #abb9cf;
+    --text-primary: #2e3440;
+    --text-secondary: #434c5e;
+    --text-muted: #4c566a;
+    --accent-primary: #88c0d0;
+    --accent-hover: #81a1c1;
+}
+
+[data-theme="Mint"] {
+    --bg-main: #0b0e14;
+    --bg-deep: #05070a;
+    --bg-card: #151921;
+    --bg-hover: #1c232d;
+    --bg-hover-strong: #252e3b;
+    --text-primary: #f0f6fc;
+    --text-secondary: #c9d1d9;
+    --text-muted: #8b949e;
+    --accent-primary: #00ffcc;
+    --accent-hover: #00e6b8;
+}
+
+[data-theme="Midnight"] {
+    --bg-main: #0f1624;
+    --bg-deep: #090e18;
+    --bg-card: #182033;
+    --bg-hover: #1f2a44;
+    --bg-hover-strong: #2a3760;
+
+    --text-primary: #eaf0ff;
+    --text-secondary: #cfd8ff;
+    --text-muted: #9aa4d6;
+
+    --accent-primary: #4c6fff;
+    --accent-hover: #3f5fe0;
+}
+
+[data-theme="Forest"] {
+    --bg-main: #121a16;
+    --bg-deep: #0b110e;
+    --bg-card: #1b2a22;
+    --bg-hover: #24382c;
+    --bg-hover-strong: #2f4737;
+
+    --text-primary: #e9f5ee;
+    --text-secondary: #cfe6da;
+    --text-muted: #9fb8aa;
+
+    --accent-primary: #3fb984;
+    --accent-hover: #35a072;
+}
+
+[data-theme="Purple"] {
+    --bg-main: #16121c;
+    --bg-deep: #0e0b13;
+    --bg-card: #221a2e;
+    --bg-hover: #2d2340;
+    --bg-hover-strong: #3a2c55;
+
+    --text-primary: #f4ecff;
+    --text-secondary: #dbcdf2;
+    --text-muted: #a999c7;
+
+    --accent-primary: #b06cff;
+    --accent-hover: #9a5be0;
+}
+
+[data-theme="Gray"] {
+    --bg-main: #181b20;
+    --bg-deep: #101317;
+    --bg-card: #22262c;
+    --bg-hover: #2d323a;
+    --bg-hover-strong: #3a404a;
+
+    --text-primary: #f2f4f8;
+    --text-secondary: #d6dbe4;
+    --text-muted: #a2a9b6;
+
+    --accent-primary: #6fa3ff;
+    --accent-hover: #5d8be0;
+}
+
+[data-theme="Black"] {
+    --bg-main: #000000;
+    --bg-deep: #000000;
+    --bg-card: #0f0f0f;
+    --bg-hover: #1a1a1a;
+    --bg-hover-strong: #262626;
+
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #9a9a9a;
+
+    --accent-primary: #5e7bff;
+    --accent-hover: #4d67d6;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #1e1e1e;
+  background-color: var(--bg-main);
   margin: 0;
   padding: 0;
   text-align: center;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .navbar {
-  background-color: #111;
+  background-color: var(--bg-deep);
   padding: 10px 0;
 }
 
 .navbar a {
-  color: #ddd;
+  color: var(--text-secondary);
   text-decoration: none;
   padding: 10px 15px;
   display: inline-block;
@@ -21,19 +148,13 @@ body {
 }
 
 .navbar a:hover {
-  background-color: #333;
+  background-color: var(--bg-hover);
   border-radius: 5px;
 }
 
 h1 {
   margin: 20px 0;
   font-size: 28px;
-}
-
-h2 {
-  margin: 20px 0;
-  font-size: 16px;
-  justify-content: left;
 }
 
 .games-container {
@@ -56,7 +177,7 @@ h2 {
 
 .download-box {
   display: flex;
-  background: #2a2a2a;
+  background: var(--bg-card);
   padding: 8px;
   border-radius: 8px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0);
@@ -74,7 +195,7 @@ h2 {
 }
 
 .download-info a {
-  color: #ddd;
+  color: var(--text-secondary);
   font-weight: bold;
   font-size: 17px;
   text-decoration: none;
@@ -82,13 +203,13 @@ h2 {
 
 .download-url {
   font-size: 13px;
-  color: #aaa;
+  color: var(--text-muted);
   word-break: break-all;
   margin-top: 5px;
 }
 
 .game-box {
-  background: #2a2a2a;
+  background: var(--bg-card);
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0);
@@ -106,7 +227,7 @@ h2 {
   display: block;
   margin-top: 10px;
   text-decoration: none;
-  color: #ddd;
+  color: var(--text-secondary);
   font-weight: bold;
   font-size: 17px;
 }
@@ -115,7 +236,7 @@ h2 {
 .download-box a:hover,
 .link-box a:hover,
 .bigbox a:hover {
-  color: #686df2;
+  color: var(--accent-primary);
 }
 
 .links-container {
@@ -128,7 +249,7 @@ h2 {
 }
 
 .link-box {
-  background: #2a2a2a;
+  background: var(--bg-card);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0);
@@ -146,7 +267,7 @@ h2 {
   display: block;
   margin-top: 10px;
   text-decoration: none;
-  color: #ddd;
+  color: var(--text-secondary);
   font-weight: bold;
 }
 
@@ -158,7 +279,7 @@ h2 {
 }
 
 .changelog-entry {
-  background: #2a2a2a;
+  background: var(--bg-card);
   padding: 15px;
   margin: 10px 0;
   border-radius: 8px;
@@ -168,7 +289,7 @@ h2 {
 .changelog-entry h2 {
   margin: 0;
   font-size: 20px;
-  color: #686df2;
+  color: var(--accent-primary);
 }
 
 .changelog-entry p {
@@ -180,7 +301,7 @@ h2 {
   max-width: 760px;
   margin: 0px auto;
   padding: 20px;
-  background-color: #2a2a2a;
+  background-color: var(--bg-card);
   border-radius: 8px;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0);
   text-align: left;
@@ -200,14 +321,14 @@ label {
 input[type="text"] {
   width: 98%;
   padding: 8px;
-  background-color: #1e1e1e;
-  color: #fff;
-  border: 1px solid #444;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  border: 1px solid var(--bg-hover-strong);
   border-radius: 4px;
 }
 
 button {
-  background-color: #686df2;
+  background-color: var(--accent-primary);
   color: white;
   padding: 8px 14px;
   border: none;
@@ -219,7 +340,7 @@ button {
 
 button:hover,
 .tag-button.active:hover {
-  background-color: #5a61e0;
+  background-color: var(--accent-hover);
 }
 
 .preset-buttons {
@@ -235,17 +356,17 @@ button:hover,
   margin: 0px;
   padding: 8px 14px;
   font-size: 14px;
-  background-color: #333;
+  background-color: var(--bg-hover);
 }
 
 .preset-buttons button:hover {
-  background-color: #444;
+  background-color: var(--bg-hover-strong);
 }
 
 .collapsible-content {
   display: none;
   padding: 10px;
-  background-color: #333;
+  background-color: var(--bg-hover);
   border-radius: 5px;
   margin-top: 10px;
 }
@@ -256,13 +377,13 @@ button:hover,
   justify-content: center;
   gap: 8px;
   padding: 15px;
-  background-color: #111;
+  background-color: var(--bg-deep);
   margin-top: 10px;
 }
 
 .tag-button {
-  background-color: #333;
-  color: #ddd;
+  background-color: var(--bg-hover);
+  color: var(--text-secondary);
   padding: 8px 14px;
   border: none;
   border-radius: 5px;
@@ -271,10 +392,10 @@ button:hover,
 }
 
 .tag-button:hover {
-  background-color: #444;
+  background-color: var(--bg-hover-strong);
 }
 
 .tag-button.active {
-  background-color: #686df2;
-  color: #fff;
+  background-color: var(--accent-primary);
+  color: var(--text-primary);
 }

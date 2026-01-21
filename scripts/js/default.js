@@ -1,7 +1,12 @@
 const defaultTitle = "WDBG";
-const defaultFavicon = "https://wowdabug.github.io/wdbg/images/favicon.png";
+const defaultFavicon = "images/favicon.png";
 const title = localStorage.getItem('customTitle');
 const favicon = localStorage.getItem('customFavicon');
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme) {
+  document.documentElement.setAttribute("data-theme", savedTheme);
+}
 
 document.title = title || defaultTitle;
 

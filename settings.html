@@ -63,6 +63,25 @@
           <button onclick="applyJSPreset('https://wdbgames.github.io/wdbg/scripts/js/blank.js')">Blank</button>
         </div>
       </div>
+      <div class="setting-group">
+        <label>Theme</label>
+        <input type="text" id="customThemeInput" placeholder="Dark">
+      </div>
+      <div class="setting-group">
+        <label>Theme Presets</label>
+        <div class="preset-buttons">
+          <button onclick="applyThemePreset('')">Dark</button>
+          <button onclick="applyThemePreset('Light')">Light</button>
+          <button onclick="applyThemePreset('Ice')">Ice</button>
+          <button onclick="applyThemePreset('Mint')">Mint</button>
+		  <button onclick="applyThemePreset('Midnight')">Midnight</button>
+		  <button onclick="applyThemePreset('Forest')">Forest</button>
+		  <button onclick="applyThemePreset('Purple')">Purple</button>
+		  <button onclick="applyThemePreset('Gray')">Gray</button>
+		  <button onclick="applyThemePreset('Black')">Black</button>
+		  
+        </div>
+      </div>
       <button onclick="saveSettings()">Save Settings</button>
     </div>
     <script>
@@ -72,6 +91,7 @@
         localStorage.setItem('panicKey', document.getElementById('panicKeyInput').value);
         localStorage.setItem('panicUrl', document.getElementById('panicUrlInput').value);
         localStorage.setItem('JS', document.getElementById('customJSInput').value);
+		localStorage.setItem('theme', document.getElementById('customThemeInput').value);
       }
 
       function applyPreset(title, favicon) {
@@ -86,6 +106,10 @@
       function applyJSPreset(url) {
         document.getElementById('customJSInput').value = url;
       }
+	 
+      function applyThemePreset(theme) {
+        document.getElementById('customThemeInput').value = theme;
+      }
 
       document.addEventListener('DOMContentLoaded', () => {
         const titleInput = document.getElementById('titleInput');
@@ -98,11 +122,14 @@
         const savedPanicKey = localStorage.getItem('panicKey');
         const savedPanicUrl = localStorage.getItem('panicUrl');
         const savedJS = localStorage.getItem('JS');
+		const theme = localStorage.getItem('theme');
         if (savedTitle) titleInput.value = savedTitle;
         if (savedFavicon) faviconInput.value = savedFavicon;
         if (savedPanicKey) panicKeyInput.value = savedPanicKey;
         if (savedPanicUrl) panicUrlInput.value = savedPanicUrl;
         if (savedJS) customJSInput.value = savedJS;
+		if (theme) customThemeInput.value = theme;
+		document.documentElement.setAttribute("data-theme", theme);
         panicKeyInput.readOnly = true;
         panicKeyInput.addEventListener('keydown', e => {
           e.preventDefault();
