@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Can you add [game]?",
+    "answer": "A simple way to find this out is by looking up what programming language [game] was coded in. If it is unity, unreal engine, game maker, godot, or javascript it probably will work. If it is c, c++, or java it probably won't work."
+  },
+  {
+    "question": "Will you add anything that isn't a game or doesn't have to do with the website?",
+    "answer": "No, unless I find it interesting."
+  },
+  {
+    "question": "What games might be added soon?",
+    "answer": "10 Minutes Till Dawn, Google Doodle Baseball, 2 Player Slope, N-Gon, PvZ, and Sandspiel. Maybe Deltarune."
+  },
+  {
+    "question": "When do you check suggestions?",
+    "answer": "Your suggestion will always be read at some point and considered, even if it takes a month to do so (:"
+  },
+  {
+    "question": "Your website is broken!",
+    "answer": "I know. I check regularly even if I don't feel like updating. However, almost everything should be working right now."
+  },
+  {
+    "question": "Your website isn't loading!",
+    "answer": "Because of a recent site overhaul relaunching this site is extremely easy. You can even fork the GitHub repo yourself and make your own website based off mine. No coding experience required!"
+  },
+  {
+    "question": "Why won't you add [game]? It's technically possible!",
+    "answer": "Maybe it's possible, but either it runs extremely slowly in a browser, is multiplayer, or it is impractical to host. Any multiplayer games will not be added due to server costs."
+  },
+  {
+    "question": "Hehehehe I hacked your firebase database!",
+    "answer": "Wow, you hacked my website. Amazing. GitHub pages sites are very finicky with firebases' auth, so this will likely never be fixed unless someone makes a pull request."
+  },
+  {
+    "question": "Can you add 2 player slope?",
+    "answer": "Yes. But do I need to? No."
+  },
+  {
+    "question": "What should I stop complaining about in the suggestions?",
+    "answer": "Nothing. Complaints are entertaining."
+  }
+]
