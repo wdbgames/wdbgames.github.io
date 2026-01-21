@@ -1,5 +1,5 @@
 const defaultTitle = "WDBG";
-const defaultFavicon = "images/favicon.png";
+const defaultFavicon = "favicon.png";
 const title = localStorage.getItem('customTitle');
 const favicon = localStorage.getItem('customFavicon');
 const savedTheme = localStorage.getItem("theme");
