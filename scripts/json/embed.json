@@ -302,5 +302,13 @@
   {
     "id": 78,
     "link": "https://wdbgames.github.io/server1/worldle/"
+  },
+  {
+    "id": 79,
+    "link": "https://wdbgames.github.io/server3/emulator/"
+  },
+  {
+    "id": 80,
+    "link": "https://wdbgames.github.io/server3/flash/"
   }
 ]

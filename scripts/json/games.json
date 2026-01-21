@@ -339,7 +339,7 @@
     "id": "54",
     "title": "Run 3",
     "tags": [
-      "Platformer"
+      "Beta"
     ]
   },
   {
@@ -493,6 +493,20 @@
     "title": "Worldle",
     "tags": [
       "Strategy"
+    ]
+  },
+  {
+    "id": "79",
+    "title": "Emulator",
+    "tags": [
+      "Beta"
+    ]
+  },
+  {
+    "id": "80",
+    "title": "Flash",
+    "tags": [
+      "Beta"
     ]
   }
 ]
