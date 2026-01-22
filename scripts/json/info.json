@@ -28,7 +28,7 @@
     "answer": "Maybe it's possible, but either it runs extremely slowly in a browser, is multiplayer, or it is impractical to host. Any multiplayer games will not be added due to server costs."
   },
   {
-    "question": "I hacked your firebase database!",
+    "question": "I hacked the firebase database!",
     "answer": "Wow, you hacked this website. Amazing. GitHub pages sites are very finicky with firebases' auth, so this will likely never be fixed unless someone makes a pull request."
   }
 ]
