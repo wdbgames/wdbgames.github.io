@@ -71,11 +71,17 @@
       <div class="setting-group">
         <label>Theme Presets</label>
         <div class="preset-buttons">
-          <button onclick="applyThemePreset('')">Dark</button>
+          <button onclick="applyThemePreset('')">Default</button>
           <button onclick="applyThemePreset('Light')">Light</button>
           <button onclick="applyThemePreset('Mint')">Mint</button>
 		  <button onclick="applyThemePreset('Contrast')">Contrast</button>
-		  
+        </div>
+      </div>
+	  <div class="setting-group">
+        <label>Settings Presets</label>
+        <div class="preset-buttons">
+		  <button onclick="applySettingsPreset('', '', '', '', '', '')">Default</button>
+          <button onclick="applySettingsPreset('Google', 'https://www.google.com/favicon.ico', 'v', 'https://www.google.com', '', 'Contrast')">Tweaks</button>
         </div>
       </div>
       <button onclick="saveSettings()">Save Settings</button>
@@ -104,6 +110,15 @@
       }
 	 
       function applyThemePreset(theme) {
+        document.getElementById('customThemeInput').value = theme;
+      }
+
+      function applySettingsPreset(title, favicon, key, urlPanic, urlJS, theme) {
+        document.getElementById('titleInput').value = title;
+        document.getElementById('faviconInput').value = favicon;
+		document.getElementById('panicKeyInput').value = key;
+		document.getElementById('panicUrlInput').value = urlPanic;
+        document.getElementById('customJSInput').value = urlJS;
         document.getElementById('customThemeInput').value = theme;
       }
 
@@ -136,3 +151,6 @@
     </script>
   </body>
 </html>
+
+
+

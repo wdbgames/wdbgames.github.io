@@ -1,11 +1,11 @@
 [
   {
-    "question": "Can you add [game]?",
+    "question": "Can [game] be added?",
     "answer": "A simple way to find this out is by looking up what programming language [game] was coded in. If it is unity, unreal engine, game maker, godot, or javascript it probably will work. If it is c, c++, or java it probably won't work."
   },
   {
-    "question": "Will you add anything that isn't a game or doesn't have to do with the website?",
-    "answer": "No, unless I find it interesting."
+    "question": "Will anything that isn't a game or doesn't have to do with the website be added?",
+    "answer": "No, unless it's relevant in some way."
   },
   {
     "question": "What games might be added soon?",
@@ -13,30 +13,22 @@
   },
   {
     "question": "When do you check suggestions?",
-    "answer": "Your suggestion will always be read at some point and considered, even if it takes a month to do so (:"
+    "answer": "Suggestions will always be read at some point and considered, even if it takes a month to do so."
   },
   {
-    "question": "Your website is broken!",
-    "answer": "I know. I check regularly even if I don't feel like updating. However, almost everything should be working right now."
+    "question": "The website is broken!",
+    "answer": "This website is checked regularly even if it's not being actively updated. However, almost everything should be working right now. Submit a suggestion if the website is broken."
   },
   {
-    "question": "Your website isn't loading!",
-    "answer": "Because of a recent site overhaul relaunching this site is extremely easy. You can even fork the GitHub repo yourself and make your own website based off mine. No coding experience required!"
+    "question": "The website isn't loading!",
+    "answer": "Because of a recent site overhaul relaunching this site is extremely easy. You can even fork the GitHub repo yourself and make your own website based off this one."
   },
   {
-    "question": "Why won't you add [game]? It's technically possible!",
+    "question": "Why can't [game] be added? It's possible to add!",
     "answer": "Maybe it's possible, but either it runs extremely slowly in a browser, is multiplayer, or it is impractical to host. Any multiplayer games will not be added due to server costs."
   },
   {
-    "question": "Hehehehe I hacked your firebase database!",
-    "answer": "Wow, you hacked my website. Amazing. GitHub pages sites are very finicky with firebases' auth, so this will likely never be fixed unless someone makes a pull request."
-  },
-  {
-    "question": "Can you add 2 player slope?",
-    "answer": "Yes. But do I need to? No."
-  },
-  {
-    "question": "What should I stop complaining about in the suggestions?",
-    "answer": "Nothing. Complaints are entertaining."
+    "question": "I hacked the firebase database!",
+    "answer": "Wow, you hacked this website. Amazing. GitHub pages sites are very finicky with firebases' auth, so this will likely never be fixed unless someone makes a pull request."
   }
 ]

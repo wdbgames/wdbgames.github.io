@@ -41,11 +41,11 @@
 }
 
 [data-theme="Contrast"] {
-	--bg-main: #262626;
-	--bg-deep: #000000;
-	--bg-card: #1a1a1a;
-	--bg-hover: #333333;
-	--bg-hover-strong: #444444;
+	--bg-main: #000000;
+	--bg-deep: #333333;
+	--bg-card: #444444;
+	--bg-hover: #555555;
+	--bg-hover-strong: #666666;
 	--text-primary: #ffffff;
 	--text-secondary: #dddddd;
 	--text-muted: #cccccc;
@@ -294,3 +294,4 @@ button:hover,
   background-color: var(--accent-primary);
   color: var(--text-primary);
 }
+
