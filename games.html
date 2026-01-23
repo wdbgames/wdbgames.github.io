@@ -13,7 +13,7 @@
       <a href="games.html">Games</a>
       <a href="changelog.html">Changelog</a>
       <a href="settings.html">Settings</a>
-	  <a href="info.html">Info</a>
+      <a href="info.html">Info</a>
     </div>
     <div id="tags-container"></div>
     <div id="game-container" class="games-container"></div>
@@ -27,6 +27,7 @@
           allGames = await response.json();
           let allTags = [...new Set(allGames.flatMap(game => game.tags || []))];
           if (!allTags.includes("GN")) allTags.push("GN");
+		  if (!allTags.includes("CMG")) allTags.push("CMG");
           allTags.sort((a, b) => {
             if (a === "Featured") return -1;
             if (b === "Featured") return 1;
@@ -56,7 +57,9 @@
           selectedTags.add(tag);
           btn.classList.add("active");
         }
-        if (selectedTags.has("GN")) {
+        if (selectedTags.has("CMG")) {
+          renderGamesCMG();
+        } else if (selectedTags.has("GN")) {
           renderGamesGN();
         } else {
           renderGames();
@@ -69,9 +72,10 @@
         filteredGames.forEach(game => {
           const gameBox = document.createElement("div");
           gameBox.className = "game-box";
-			gameBox.innerHTML = `
-			  <img src="images/${game.id}.png" alt="${game.title}" onerror="this.src='images/default.png'">
-			  <a href="embed.html?id=${game.id}" target="_blank" rel="noopener">
+          gameBox.innerHTML = `
+			  
+						<img src="images/${game.id}.png" alt="${game.title}" onerror="this.src='images/error.png'">
+							<a href="embed.html?id=${game.id}&t=1" target="_blank" rel="noopener">
 				${game.title}
 			  </a>
 			`;
@@ -90,19 +94,41 @@
             const card = document.createElement('div');
             card.className = 'zone-card game-box';
             card.innerHTML = `
-                        
-							<img src="${img}" alt="${zone.name}">
-								<a href="#">${zone.name}</a>
-                    `;
-			card.onclick = (e) => {
-			  e.preventDefault();
-			  window.open(`embed_gn.html?id=${zone.id}`, "_blank");
-			};
+			  
+							<img src="${img}" alt="${zone.name}" onerror="this.src='images/error.png'">
+								<a href="embed.html?id=${zone.id}&t=2" target="_blank" rel="noopener">
+				${zone.name}
+			  </a>
+            `;
             container.appendChild(card);
           });
         } catch (error) {
           container.innerHTML = " < p > Error loading external zones. < /p>";
           console.error(error);
+        }
+      }
+      async function renderGamesCMG() {
+        const gameIds = ["11697", "102605", "209230"];
+        const container = document.getElementById('game-container');
+        try {
+          const response = await fetch('cmatgame_games_with_levels.json');
+          const data = await response.json();
+          const filteredGames = data.game.filter(game => gameIds.includes(game.id));
+          container.innerHTML = "";
+          filteredGames.forEach(game => {
+            const card = document.createElement('div');
+            card.className = 'game-box';
+            card.innerHTML = `
+			  
+								<img src="https://www.coolmathgames.com/${game.si}" alt="${game.title}" onerror="this.src='images/error.png'">
+									<a href="embed.html?id=${game.id}&t=3" target="_blank" rel="noopener">
+				${game.title}
+			  </a>
+      `;
+            container.appendChild(card);
+          });
+        } catch (err) {
+          console.error("Failed to load games:", err);
         }
       }
       document.addEventListener("DOMContentLoaded", loadGames);
