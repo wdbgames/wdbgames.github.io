@@ -27,7 +27,7 @@
           allGames = await response.json();
           let allTags = [...new Set(allGames.flatMap(game => game.tags || []))];
           if (!allTags.includes("GN")) allTags.push("GN");
-		  if (!allTags.includes("CMG")) allTags.push("CMG");
+          if (!allTags.includes("CMG")) allTags.push("CMG");
           allTags.sort((a, b) => {
             if (a === "Featured") return -1;
             if (b === "Featured") return 1;
@@ -45,7 +45,7 @@
           });
           renderGames();
         } catch (error) {
-          console.error("Error loading games JSON:", error);
+          console.error(error);
         }
       }
 
@@ -74,6 +74,9 @@
           gameBox.className = "game-box";
           gameBox.innerHTML = `
 			  
+						
+						
+						
 						<img src="images/${game.id}.png" alt="${game.title}" onerror="this.src='images/error.png'">
 							<a href="embed.html?id=${game.id}&t=1" target="_blank" rel="noopener">
 				${game.title}
@@ -95,6 +98,9 @@
             card.className = 'zone-card game-box';
             card.innerHTML = `
 			  
+							
+							
+							
 							<img src="${img}" alt="${zone.name}" onerror="this.src='images/error.png'">
 								<a href="embed.html?id=${zone.id}&t=2" target="_blank" rel="noopener">
 				${zone.name}
@@ -103,32 +109,35 @@
             container.appendChild(card);
           });
         } catch (error) {
-          container.innerHTML = " < p > Error loading external zones. < /p>";
           console.error(error);
         }
       }
       async function renderGamesCMG() {
-        const gameIds = ["11697", "102605", "209230"];
         const container = document.getElementById('game-container');
         try {
-          const response = await fetch('cmatgame_games_with_levels.json');
-          const data = await response.json();
-          const filteredGames = data.game.filter(game => gameIds.includes(game.id));
-          container.innerHTML = "";
-          filteredGames.forEach(game => {
-            const card = document.createElement('div');
-            card.className = 'game-box';
-            card.innerHTML = `
-			  
-								<img src="https://www.coolmathgames.com/${game.si}" alt="${game.title}" onerror="this.src='images/error.png'">
-									<a href="embed.html?id=${game.id}&t=3" target="_blank" rel="noopener">
-				${game.title}
-			  </a>
-      `;
-            container.appendChild(card);
-          });
-        } catch (err) {
-          console.error("Failed to load games:", err);
+          const [resA, resB] = await Promise.all([
+            fetch('scripts/json/cmatgame_ids.json'),
+            fetch('scripts/json/cmatgame_games_with_levels.json')
+          ]);
+          const manualIds = await resA.json();
+          const data = await resB.json();
+          const rawIds = [...(Array.isArray(manualIds) ? manualIds : []), ...(data.trendy || []), ...(data.top9 || [])].map(id => String(id).trim());
+          const uniqueIds = [...new Set(rawIds)];
+          const gamesHtml = uniqueIds.map(id => data.game.find(g => String(g.id) === id)).filter(Boolean).map(game => `
+        
+								
+								<div class="game-box">
+									<img src="https://www.coolmathgames.com/${game.si}" 
+               alt="${game.title}" 
+               onerror="this.src='images/error.png'">
+										<a href="embed.html?id=${game.id}&t=3" target="_blank" rel="noopener">
+            ${game.title}
+          </a>
+									</div>
+      `).join('');
+          container.innerHTML = gamesHtml;
+        } catch (error) {
+          console.error(error);
         }
       }
       document.addEventListener("DOMContentLoaded", loadGames);

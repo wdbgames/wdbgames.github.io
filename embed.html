@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WDBG</title>
+	<link rel="stylesheet" href="scripts/style.css">
+    <script src="scripts/main.js"></script>
     <style>
       html,
       body {
         width: 100%;
         height: 100%;
-        margin: 0;
       }
 
       iframe {
@@ -22,13 +23,12 @@
   </head>
   <body>
     <iframe id="viewer"></iframe>
-    <script src="scripts/main.js"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
+      const id = Number(params.get("id"));
       const type = Number(params.get("t"));
       const iframe = document.getElementById("viewer");
       if (type === 1) {
-        const id = Number(params.get("id"));
         fetch("scripts/json/embed.json").then(res => res.json()).then(data => {
           const entry = data.find(e => e.id === id);
           iframe.src = entry?.link || "about:blank";
@@ -65,7 +65,6 @@
             const zonesURL = sha ? `https://cdn.jsdelivr.net/gh/gn-math/assets@${sha}/zones.json?t=` + Date.now() : "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json";
             const res = await fetch(zonesURL);
             zones = await res.json();
-            const id = params.get('id');
             const zone = zones.find(z => String(z.id) === String(id));
             if (zone) loadZoneContent(zone);
           } catch (e) {
@@ -84,7 +83,41 @@
           }
         }
         listZones();
-      }
+      } else if (type == 3) {
+        async function loadGame() {
+          let game;
+          try {
+            const response = await fetch('scripts/json/cmatgame_games_with_levels.json');
+            const data = await response.json();
+            game = data.game.find(game => game.id == id);
+            if (!game) {
+              console.error("Game not found in JSON");
+              return;
+            }
+            const url = "https://www.coolmathgames.com/0-" + game.alias;
+            let embedUrl = url + "/play";
+            const embedResponse = await fetch(embedUrl);
+            if (!embedResponse.ok) throw new Error("primary url failed");
+            const html = await embedResponse.text();
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(html, "text/html");
+            let baseTag = doc.querySelector("base");
+            if (baseTag) {
+              let baseHref = baseTag.getAttribute("href");
+              let fullPath = baseHref.startsWith('http') ? baseHref : "https:" + baseHref;
+              document.getElementById("viewer").src = fullPath + "index.html";
+            } else {
+              throw new Error("no  < base > tag ");
+              }
+            } catch (error) {
+              console.warn("Embed failed, attempting fallback:", error);
+              let gameName = game.alias.replace(/^[0-9]+-*/, "").replace(/-/g, '').toLowerCase();
+              let fallbackUrl = `https://${gameName}.coolmathgames.com`;
+              document.getElementById("viewer").src = fallbackUrl;
+            }
+          }
+          loadGame();
+        }
     </script>
   </body>
 </html>
