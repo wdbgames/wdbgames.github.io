@@ -112,28 +112,48 @@
           console.error(error);
         }
       }
-      async function renderGamesCMG() {
+async function renderGamesCMG() {
         const container = document.getElementById('game-container');
         try {
-          const [resA, resB] = await Promise.all([
+          const [resA, resB, resC] = await Promise.all([
             fetch('scripts/json/cmatgame_ids.json'),
-            fetch('scripts/json/cmatgame_games_with_levels.json')
+            fetch('scripts/json/cmatgame_games_with_levels.json'),
+            fetch('scripts/json/popular_nashville_tn.json')
           ]);
-          const manualIds = await resA.json();
-          const data = await resB.json();
-          const rawIds = [...(Array.isArray(manualIds) ? manualIds : []), ...(data.trendy || []), ...(data.top9 || [])].map(id => String(id).trim());
-          const uniqueIds = [...new Set(rawIds)];
-          const gamesHtml = uniqueIds.map(id => data.game.find(g => String(g.id) === id)).filter(Boolean).map(game => `
-        
-								
-								<div class="game-box">
-									<img src="https://www.coolmathgames.com/${game.si}" 
+          const manual = await resA.json();
+          const popular = await resB.json();
+          const local = await resC.json();
+          
+          const clean = (url) => url.replace(/^\/(\d+-)?/, "");
+          
+			const localIds = local.map(item => {
+				const nashAlias = clean(item.pageurl); 
+				const match = popular.game.find(g => {
+					const masterAlias = g.alias ? g.alias.toLowerCase().trim() : "";
+					return masterAlias === nashAlias;
+				});
+				if (!match) console.warn(`Match failed for Nashville game: ${nashAlias}`);
+				return match ? match.id : null;
+			}).filter(Boolean);
+
+          const ids = [
+            ...(Array.isArray(manual) ? manual : []), 
+            ...(popular.trendy || []), 
+            ...(popular.top9 || []),
+            ...localIds
+          ].map(id => String(id).trim());
+          
+          const uniqueIds = [...new Set(ids)];
+          const gamesHtml = uniqueIds.map(id => popular.game.find(g => String(g.id) === id)).filter(Boolean).map(game => `
+                                
+                                <div class="game-box">
+                                    <img src="https://www.coolmathgames.com/${game.si}" 
                alt="${game.title}" 
                onerror="this.src='images/error.png'">
-										<a href="embed.html?id=${game.id}&t=3" target="_blank" rel="noopener">
+                                        <a href="embed.html?id=${game.id}&t=3" target="_blank" rel="noopener">
             ${game.title}
           </a>
-									</div>
+                                    </div>
       `).join('');
           container.innerHTML = gamesHtml;
         } catch (error) {
