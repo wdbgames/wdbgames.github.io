@@ -29,95 +29,113 @@
       const type = Number(params.get("t"));
       const iframe = document.getElementById("viewer");
       if (type === 1) {
-        fetch("scripts/json/embed.json").then(res => res.json()).then(data => {
-          const entry = data.find(e => e.id === id);
-          iframe.src = entry?.link || "about:blank";
-        }).catch(err => {
-          console.error("Failed to load embed JSON", err);
-          iframe.src = "about:blank";
-        });
+      	fetch("scripts/json/embed.json").then(res => res.json()).then(data => {
+      		const entry = data.find(e => e.id === id);
+      		iframe.src = entry?.link || "about:blank";
+      	}).catch(err => {
+      		console.error("json not loaded");
+      		iframe.src = "about:blank";
+      	});
       } else if (type === 2) {
-        const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
-        const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
-        const zonesSources = ["https://cdn.jsdelivr.net/%67%68/%67%6e%2d%6d%61%74%68/%61%73%73%65%74%73@%6d%61%69%6e/%7a%6f%6e%65%73%2e%6a%73%6f%6e", "https://cdn.jsdelivr.net/gh/gn-math/assets@latest/zones.json", "https://cdn.jsdelivr.net/gh/gn-math/assets@master/zones.json", "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json"];
-        let zones = [];
-        async function listZones() {
-          try {
-            let sha = null;
-            const source = zonesSources[Math.floor(Math.random() * zonesSources.length)];
-            try {
-              const res = await fetch(source + "?t=" + Date.now());
-              if (res.ok) {
-                const json = await res.json();
-                sha = Array.isArray(json) ? json[0]?.sha : null;
-              }
-            } catch {
-              console.warn("Primary fetch failed");
-            }
-            if (!sha) {
-              try {
-                const fallback = await fetch("https://raw.githubusercontent.com/gn-math/xml/refs/heads/main/sha.txt?t=" + Date.now());
-                if (fallback.ok) sha = (await fallback.text()).trim();
-              } catch {
-                console.error("SHA fallback failed");
-              }
-            }
-            const zonesURL = sha ? `https://cdn.jsdelivr.net/gh/gn-math/assets@${sha}/zones.json?t=` + Date.now() : "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json";
-            const res = await fetch(zonesURL);
-            zones = await res.json();
-            const zone = zones.find(z => String(z.id) === String(id));
-            if (zone) loadZoneContent(zone);
-          } catch (e) {
-            console.error("Failed to list zones", e);
-          }
-        }
+      	const coverURL = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
+      	const htmlURL = "https://cdn.jsdelivr.net/gh/gn-math/html@main";
+      	const zonesSources = ["https://cdn.jsdelivr.net/%67%68/%67%6e%2d%6d%61%74%68/%61%73%73%65%74%73@%6d%61%69%6e/%7a%6f%6e%65%73%2e%6a%73%6f%6e", "https://cdn.jsdelivr.net/gh/gn-math/assets@latest/zones.json", "https://cdn.jsdelivr.net/gh/gn-math/assets@master/zones.json", "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json"];
+      	let zones = [];
+      	async function listZones() {
+      		try {
+      			let sha = null;
+      			const source = zonesSources[Math.floor(Math.random() * zonesSources.length)];
+      			try {
+      				const res = await fetch(source + "?t=" + Date.now());
+      				if (res.ok) {
+      					const json = await res.json();
+      					sha = Array.isArray(json) ? json[0]?.sha : null;
+      				}
+      			} catch {
+      				console.warn("fetch method 1 failed");
+      			}
+      			if (!sha) {
+      				try {
+      					const fallback = await fetch("https://raw.githubusercontent.com/gn-math/xml/refs/heads/main/sha.txt?t=" + Date.now());
+      					if (fallback.ok) sha = (await fallback.text()).trim();
+      				} catch {
+      					console.error("sha failed");
+      				}
+      			}
+      			const zonesURL = sha ? `https://cdn.jsdelivr.net/gh/gn-math/assets@${sha}/zones.json?t=` + Date.now() : "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json";
+      			const res = await fetch(zonesURL);
+      			zones = await res.json();
+      			const zone = zones.find(z => String(z.id) === String(id));
+      			if (zone) loadZoneContent(zone);
+      		} catch (e) {
+      			console.error("zone loading failed", e);
+      		}
+      	}
 
-        function loadZoneContent(zone) {
-          if (zone.url.startsWith("http")) {
-            window.location.href = zone.url;
-          } else {
-            const finalUrl = zone.url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
-            fetch(finalUrl + "?t=" + Date.now()).then(res => res.text()).then(html => {
-              iframe.srcdoc = html;
-            }).catch(err => console.error("Failed to load zone content", err));
-          }
-        }
-        listZones();
+      	function loadZoneContent(zone) {
+      		if (zone.url.startsWith("http")) {
+      			window.location.href = zone.url;
+      		} else {
+      			const finalUrl = zone.url.replace("{COVER_URL}", coverURL).replace("{HTML_URL}", htmlURL);
+      			fetch(finalUrl + "?t=" + Date.now()).then(res => res.text()).then(html => {
+      				iframe.srcdoc = html;
+      			}).catch(err => console.error("zone content loading failed", err));
+      		}
+      	}
+      	listZones();
       } else if (type == 3) {
-        async function loadGame() {
-          let game;
-          try {
-            const response = await fetch('scripts/json/cmatgame_games_with_levels.json');
-            const data = await response.json();
-            game = data.game.find(game => game.id == id);
-            if (!game) {
-              console.error("Game not found in JSON");
-              return;
-            }
-            const url = "https://www.coolmathgames.com/0-" + game.alias;
-            let embedUrl = url + "/play";
-            const embedResponse = await fetch(embedUrl);
-            if (!embedResponse.ok) throw new Error("primary url failed");
-            const html = await embedResponse.text();
-            let parser = new DOMParser();
-            let doc = parser.parseFromString(html, "text/html");
-            let baseTag = doc.querySelector("base");
-            if (baseTag) {
-              let baseHref = baseTag.getAttribute("href");
-              let fullPath = baseHref.startsWith('http') ? baseHref : "https:" + baseHref;
-              document.getElementById("viewer").src = fullPath + "index.html";
-            } else {
-              throw new Error("no  < base > tag ");
-              }
-            } catch (error) {
-              console.warn("Embed failed, attempting fallback:", error);
-              let gameName = game.alias.replace(/^[0-9]+-*/, "").replace(/-/g, '').toLowerCase();
-              let fallbackUrl = `https://${gameName}.coolmathgames.com`;
-              document.getElementById("viewer").src = fallbackUrl;
-            }
-          }
-          loadGame();
-        }
+      	async function loadGame() {
+      		let game;
+      		try {
+      			const response = await fetch('scripts/json/cmatgame_games_with_levels.json');
+      			const data = await response.json();
+      			game = data.game.find(game => game.id == id);
+      			if (!game) {
+      				console.error("Game not found in JSON");
+      				return;
+      			}
+      			const url = "https://www.coolmathgames.com/0-" + game.alias;
+      			let embedUrl = url + "/play";
+      			const embedResponse = await fetch(embedUrl);
+      			if (!embedResponse.ok) throw new Error("primary url failed");
+      			const html = await embedResponse.text();
+      			let parser = new DOMParser();
+      			let doc = parser.parseFromString(html, "text/html");
+      			let baseTag = doc.querySelector("base");
+      			if (baseTag) {
+      				let baseHref = baseTag.getAttribute("href");
+      				let fullPath = baseHref.startsWith('http') ? baseHref : "https:" + baseHref;
+      				document.getElementById("viewer").src = fullPath + "index.html";
+      			} else {
+      				throw new Error("no base tag");
+      			}
+      		} catch (error) {
+      			try {
+      				console.warn("method 1 failed", error);
+      				let gameName = game.alias.replace(/^[0-9]+-*/, "").replace(/-/g, '').toLowerCase();
+      				let fallbackUrl = `https://${gameName}.coolmathgames.com`;
+      				document.getElementById("viewer").src = fallbackUrl;
+      				const html = await embedResponse.text();
+      				let parser = new DOMParser();
+      				let doc = parser.parseFromString(html, "text/html");
+      				let baseTag = doc.querySelector("base");
+      				if (baseTag) {
+      					let baseHref = baseTag.getAttribute("href");
+      					let fullPath = baseHref.startsWith('http') ? baseHref : "https:" + baseHref;
+      					document.getElementById("viewer").src = fullPath + "index.html";
+      				} else {
+      					throw new Error("no base tag");
+      				}
+      			} catch (error) {
+      				console.warn("method 2 failed", error);
+      				let gameName = game.alias.replace(/^[0-9]+-*/, "").replace(/-/g, '').toLowerCase();
+      				let fallbackUrl = `https://${gameName}1.coolmathgames.com`;
+      				document.getElementById("viewer").src = fallbackUrl;
+      			}
+      		}
+      	}
+      	loadGame();
+      }
     </script>
   </body>
 </html>

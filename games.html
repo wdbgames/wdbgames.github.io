@@ -22,143 +22,115 @@
       let selectedTags = new Set();
       const container = document.getElementById("game-container");
       async function loadGames() {
-        try {
-          const response = await fetch("scripts/json/games.json");
-          allGames = await response.json();
-          let allTags = [...new Set(allGames.flatMap(game => game.tags || []))];
-          if (!allTags.includes("GN")) allTags.push("GN");
-          if (!allTags.includes("CMG")) allTags.push("CMG");
-          allTags.sort((a, b) => {
-            if (a === "Featured") return -1;
-            if (b === "Featured") return 1;
-            if (a === "Beta") return 1;
-            if (b === "Beta") return -1;
-            return a.localeCompare(b);
-          });
-          const tagsContainer = document.getElementById("tags-container");
-          allTags.forEach(tag => {
-            const btn = document.createElement("button");
-            btn.textContent = tag;
-            btn.className = "tag-button";
-            btn.onclick = () => toggleTag(tag, btn);
-            tagsContainer.appendChild(btn);
-          });
-          renderGames();
-        } catch (error) {
-          console.error(error);
-        }
+          try {
+              const response = await fetch("scripts/json/games.json");
+              allGames = await response.json();
+              let allTags = [...new Set(allGames.flatMap(game => game.tags || []))];
+              if (!allTags.includes("GN")) allTags.push("GN");
+              if (!allTags.includes("CMG")) allTags.push("CMG");
+              allTags.sort((a, b) => {
+                  if (a === "Featured") return -1;
+                  if (b === "Featured") return 1;
+                  if (a === "Beta") return 1;
+                  if (b === "Beta") return -1;
+                  return a.localeCompare(b);
+              });
+              const tagsContainer = document.getElementById("tags-container");
+              allTags.forEach(tag => {
+                  const btn = document.createElement("button");
+                  btn.textContent = tag;
+                  btn.className = "tag-button";
+                  btn.onclick = () => toggleTag(tag, btn);
+                  tagsContainer.appendChild(btn);
+              });
+              renderGames();
+          } catch (error) {
+              console.error(error);
+          }
       }
 
       function toggleTag(tag, btn) {
-        if (selectedTags.has(tag)) {
-          selectedTags.delete(tag);
-          btn.classList.remove("active");
-        } else {
-          selectedTags.add(tag);
-          btn.classList.add("active");
-        }
-        if (selectedTags.has("CMG")) {
-          renderGamesCMG();
-        } else if (selectedTags.has("GN")) {
-          renderGamesGN();
-        } else {
-          renderGames();
-        }
+          const special = tag == "CMG" || tag == "GN";
+          if (selectedTags.has(tag)) {
+              selectedTags.delete(tag);
+              btn.classList.remove("active");
+          } else {
+              selectedTags.add(tag);
+              btn.classList.add("active");
+          }
+          if (selectedTags.has("CMG")) {
+              renderGamesCMG();
+          } else if (selectedTags.has("GN")) {
+              renderGamesGN();
+          }
+          renderGames(special);
       }
 
       function renderGames() {
-        container.innerHTML = "";
-        const filteredGames = selectedTags.size === 0 ? allGames : allGames.filter(game => (game.tags || []).some(t => selectedTags.has(t)));
-        filteredGames.forEach(game => {
-          const gameBox = document.createElement("div");
-          gameBox.className = "game-box";
-          gameBox.innerHTML = `
-			  
-						
-						
-						
-						<img src="images/${game.id}.png" alt="${game.title}" onerror="this.src='images/error.png'">
-							<a href="embed.html?id=${game.id}&t=1" target="_blank" rel="noopener">
-				${game.title}
-			  </a>
+          container.innerHTML = "";
+          const filteredGames = selectedTags.size === 0 ? allGames : allGames.filter(game => (game.tags || []).some(t => selectedTags.has(t)));
+          filteredGames.forEach(game => {
+              const gameBox = document.createElement("div");
+              gameBox.className = "game-box";
+              gameBox.innerHTML = `
+				  <img src="images/${game.id}.png" alt="${game.title}" onerror="this.src='images/error.png'">
+				  <a href="embed.html?id=${game.id}&t=1" target="_blank" rel="noopener"> ${game.title} </a>
 			`;
-          container.appendChild(gameBox);
-        });
+              container.appendChild(gameBox);
+          });
       }
       async function renderGamesGN() {
-        const zonesURL = "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json";
-        const imgBase = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
-        try {
-          const response = await fetch(zonesURL);
-          const zones = await response.json();
-          container.innerHTML = "";
-          zones.forEach(zone => {
-            const img = zone.cover.replace("{COVER_URL}", imgBase);
-            const card = document.createElement('div');
-            card.className = 'zone-card game-box';
-            card.innerHTML = `
-			  
-							
-							
-							
-							<img src="${img}" alt="${zone.name}" onerror="this.src='images/error.png'">
-								<a href="embed.html?id=${zone.id}&t=2" target="_blank" rel="noopener">
-				${zone.name}
-			  </a>
+          const zonesURL = "https://cdn.jsdelivr.net/gh/gn-math/assets/zones.json";
+          const imgBase = "https://cdn.jsdelivr.net/gh/gn-math/covers@main";
+          try {
+              const response = await fetch(zonesURL);
+              const zones = await response.json();
+              zones.forEach(zone => {
+                  const img = zone.cover.replace("{COVER_URL}", imgBase);
+                  const card = document.createElement('div');
+                  card.className = 'zone-card game-box';
+                  card.innerHTML = `
+					  <img src="${img}" alt="${zone.name}" onerror="this.src='images/error.png'">
+					  <a href="embed.html?id=${zone.id}&t=2" target="_blank" rel="noopener"> ${zone.name} </a>
             `;
-            container.appendChild(card);
-          });
-        } catch (error) {
-          console.error(error);
-        }
+                  container.appendChild(card);
+              });
+          } catch (error) {
+              console.error(error);
+          }
       }
-async function renderGamesCMG() {
-        const container = document.getElementById('game-container');
-        try {
-          const [resA, resB, resC] = await Promise.all([
-            fetch('scripts/json/cmatgame_ids.json'),
-            fetch('scripts/json/cmatgame_games_with_levels.json'),
-            fetch('scripts/json/popular_nashville_tn.json')
-          ]);
-          const manual = await resA.json();
-          const popular = await resB.json();
-          const local = await resC.json();
-          
-          const clean = (url) => url.replace(/^\/(\d+-)?/, "");
-          
-			const localIds = local.map(item => {
-				const nashAlias = clean(item.pageurl); 
-				const match = popular.game.find(g => {
-					const masterAlias = g.alias ? g.alias.toLowerCase().trim() : "";
-					return masterAlias === nashAlias;
-				});
-				if (!match) console.warn(`Match failed for Nashville game: ${nashAlias}`);
-				return match ? match.id : null;
-			}).filter(Boolean);
-
-          const ids = [
-            ...(Array.isArray(manual) ? manual : []), 
-            ...(popular.trendy || []), 
-            ...(popular.top9 || []),
-            ...localIds
-          ].map(id => String(id).trim());
-          
-          const uniqueIds = [...new Set(ids)];
-          const gamesHtml = uniqueIds.map(id => popular.game.find(g => String(g.id) === id)).filter(Boolean).map(game => `
-                                
-                                <div class="game-box">
-                                    <img src="https://www.coolmathgames.com/${game.si}" 
-               alt="${game.title}" 
-               onerror="this.src='images/error.png'">
-                                        <a href="embed.html?id=${game.id}&t=3" target="_blank" rel="noopener">
-            ${game.title}
-          </a>
-                                    </div>
+      async function renderGamesCMG() {
+          const container = document.getElementById('game-container');
+          try {
+              const [resA, resB, resC] = await Promise.all([
+                  fetch('scripts/json/cmatgame_ids.json'),
+                  fetch('scripts/json/cmatgame_games_with_levels.json'),
+                  fetch('scripts/json/popular_nashville_tn.json')
+              ]);
+              const manual = await resA.json();
+              const popular = await resB.json();
+              const local = await resC.json();
+              const clean = (url) => url.replace(/^\/(\d+-)?/, "");
+              const localIds = local.map(item => {
+                  const nashAlias = clean(item.pageurl);
+                  const match = popular.game.find(g => {
+                      const masterAlias = g.alias ? g.alias.toLowerCase().trim() : "";
+                      return masterAlias === nashAlias;
+                  });
+                  return match ? match.id : null;
+              }).filter(Boolean);
+              const ids = [...(Array.isArray(manual) ? manual : []), ...(popular.trendy || []), ...(popular.top9 || []), ...localIds].map(id => String(id).trim());
+              const uniqueIds = [...new Set(ids)];
+              const gamesHtml = uniqueIds.map(id => popular.game.find(g => String(g.id) === id)).filter(Boolean).map(game => `
+				<div class="game-box">
+				  <img src="https://www.coolmathgames.com/${game.si}" alt="${game.title}" onerror="this.src='images/error.png'">
+				  <a href="embed.html?id=${game.id}&t=3" target="_blank" rel="noopener"> ${game.title} </a>
+				</div>
       `).join('');
-          container.innerHTML = gamesHtml;
-        } catch (error) {
-          console.error(error);
-        }
+              container.innerHTML = container.innerHTML + gamesHtml;
+          } catch (error) {
+              console.error(error);
+          }
       }
       document.addEventListener("DOMContentLoaded", loadGames);
     </script>
