@@ -220,6 +220,10 @@
     "link": "https://wdbgames.github.io/server1/sandboxels/"
   },
   {
+    "id": 81,
+    "link": "https://wdbgames.github.io/server1/sandspiel/"
+  },
+  {
     "id": 57,
     "link": "https://wdbgames.github.io/server1/sandtris/"
   },
@@ -242,6 +246,10 @@
   {
     "id": 62,
     "link": "https://wdbgames.github.io/server1/soccer_random/"
+  },
+  {
+    "id": 82,
+    "link": "https://wdbgames.github.io/server1/space_waves/"
   },
   {
     "id": 63,

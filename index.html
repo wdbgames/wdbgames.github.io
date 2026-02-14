@@ -55,14 +55,14 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  const viewsRef = db.ref("views/home");
+  const viewsRef = db.ref("data/views");
   viewsRef.transaction(current => (current || 0) + 1);
   viewsRef.on("value", snapshot => {
     const views = snapshot.val();
     document.getElementById("viewCount").innerText = views + " Views";
   });
 
-  const messageRef = db.ref("message/home");
+  const messageRef = db.ref("data/message");
   messageRef.on("value", snapshot => {
     const message = snapshot.val();
     document.getElementById("message").innerText = message;

@@ -357,6 +357,13 @@
     ]
   },
   {
+    "id": "81",
+    "title": "Sandspiel",
+    "tags": [
+      "Beta"
+    ]
+  },
+  {
     "id": "57",
     "title": "Sandtris",
     "tags": [
@@ -394,6 +401,13 @@
     "title": "Soccer Random",
     "tags": [
       "Sports"
+    ]
+  },
+  {
+    "id": "82",
+    "title": "Space Waves",
+    "tags": [
+      "Beta"
     ]
   },
   {
@@ -499,14 +513,14 @@
     "id": "79",
     "title": "Emulator",
     "tags": [
-      "Beta"
+      "Featured"
     ]
   },
   {
     "id": "80",
     "title": "Flash",
     "tags": [
-      "Beta"
+      "Featured"
     ]
   }
 ]
