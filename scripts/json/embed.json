@@ -1,5 +1,9 @@
 [
   {
+    "id": 85,
+    "link": "https://wdbgames.github.io/server3/10_minutes_till_dawn/"
+  },
+  {
     "id": 1,
     "link": "https://wdbgames.github.io/server1/2048/"
   },
@@ -166,6 +170,10 @@
   {
     "id": 41,
     "link": "https://wdbgames.github.io/server1/mr_mine/"
+  },
+  {
+    "id": 84,
+    "link": "https://wdbgames.github.io/server1/n-gon/"
   },
   {
     "id": 42,
