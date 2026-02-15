@@ -174,17 +174,10 @@
     "tags": []
   },
   {
-    "id": "28",
-    "title": "FNAF",
-    "tags": [
-      "Beta"
-    ]
-  },
-  {
     "id": "29",
     "title": "Granny",
     "tags": [
-      "Beta"
+      "Strategy"
     ]
   },
   {
@@ -278,13 +271,6 @@
     ]
   },
   {
-    "id": "44",
-    "title": "People Playground",
-    "tags": [
-      "Beta"
-    ]
-  },
-  {
     "id": "45",
     "title": "Pixels Filling Squares",
     "tags": [
@@ -331,9 +317,7 @@
   {
     "id": "53",
     "title": "Rooftop Snipers 2",
-    "tags": [
-      "Beta"
-    ]
+    "tags": []
   },
   {
     "id": "54",
