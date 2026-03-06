@@ -1,21 +1,17 @@
-function loadJSFromURL() {
-  const url = localStorage.getItem('JS');
-  const fallback = 'scripts/js/default.js';
-
-  function load(src, onFail) {
-    const s = document.createElement('script');
-    s.src = src;
-    s.onload = () => {};
-    s.onerror = onFail;
-    document.body.appendChild(s);
-  }
-
-  if (url && url.trim()) {
-    load(url, () => load(fallback, () => {}));
-  } else {
-    load(fallback, () => {});
-  }
+function load() {
+	const JS = localStorage.getItem("JS");
+	const defaultJS = "scripts/js/default.js";
+	function load(src, error) {
+		const script = document.createElement("script");
+		script.src = src;
+		script.onload = () => {};
+		script.onerror = error;
+		document.body.appendChild(script);
+	}
+	if (JS && JS.trim()) {
+		load(JS, () => load(defaultJS, () => {}));
+	} else {
+		load(defaultJS, () => {});
+	}
 }
-
-document.addEventListener('DOMContentLoaded', loadJSFromURL);
-
+document.addEventListener("DOMContentLoaded", load);

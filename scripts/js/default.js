@@ -1,35 +1,25 @@
 const defaultTitle = "WDBG";
 const defaultFavicon = "favicon.png";
-const title = localStorage.getItem('customTitle');
-const favicon = localStorage.getItem('customFavicon');
+const title = localStorage.getItem("customTitle");
+const favicon = localStorage.getItem("customFavicon");
 const theme = localStorage.getItem("theme");
-
-// theme
 if (theme) {
-  document.documentElement.setAttribute("data-theme", theme);
+	document.documentElement.setAttribute("data-theme", theme);
 }
-
-// title
 document.title = title || defaultTitle;
-
-// favicon
 let link = document.querySelector("link[rel~='icon']");
 if (!link) {
-    link = document.createElement('link');
-    link.rel = 'icon';
-    document.head.appendChild(link);
+	link = document.createElement("link");
+	link.rel = "icon";
+	document.head.appendChild(link);
 }
-
 link.href = favicon || defaultFavicon;
-
-// panic key
-document.addEventListener('keydown', e => {
-    const tag = document.activeElement.tagName.toLowerCase();
-    if (tag === 'input' || tag === 'textarea') return;
-	
-    const panicKey = localStorage.getItem('panicKey');
-    const panicUrl = localStorage.getItem('panicUrl');
-    if (panicKey && panicUrl && e.key.toLowerCase() === panicKey) {
-        window.open(panicUrl, '_blank');
-    }
+document.addEventListener("keydown", (e) => {
+	const tag = document.activeElement.tagName.toLowerCase();
+	if (tag === "input" || tag === "textarea") return;
+	const panicKey = localStorage.getItem("panicKey");
+	const panicUrl = localStorage.getItem("panicUrl");
+	if (panicKey && panicUrl && e.key.toLowerCase() === panicKey) {
+		window.open(panicUrl, "_blank");
+	}
 });
